@@ -81,7 +81,7 @@ public:
 	void insertEdge(int from, int to, int weight);  //inserts new edge in graph
 	bool isEdge(int from, int to);  //returns true if there is an edge between the vertices from and to
 	int getWeight(int from, int to);  //returns the weight of the edge between the vertices from and to
-	int * getAdjacent(int vertex);  //return an array of integers representing vertices adjacent to vertex
+    vector<int> getAdjacent(int vertex);  //return an array of integers representing vertices adjacent to vertex
 	void printDijkstra(int source);  //prints result of running Dijkstra algorithm with source vertex
 	void printGraph(); //prints graph in a format sorted by ascending vertex and edge list
 };
@@ -131,7 +131,7 @@ int Graphs_P3::getWeight(int from, int to){ //returns the weight of the edge bet
 	return -1;
 }
 
-int* Graphs_P3::getAdjacent(int vertex){
+vector<int> Graphs_P3::getAdjacent(int vertex){  //return an array of integers representing vertices adjacent to vertex{
 	queue<int> q;
 	int index = vertexConverter[vertex]-1;
 	Vertex* v = &theVertices[index];
@@ -142,12 +142,12 @@ int* Graphs_P3::getAdjacent(int vertex){
 		v = v->next;
 	}
 	int size = q.size();
-	int* output2 = new int[size];
+	vector<int> output;
 	for(int i = 0; i != size; ++i){
-		*(output2+i)=q.front();
+		output.push_back(q.front());
 		q.pop();
 	}
-	return output2;
+	return output;
 }
 
 
@@ -166,7 +166,7 @@ void Graphs_P3::printDijkstra(int source){
 
 	//init the first thing to traverse(source)
 	int index = vertexConverter[source]-1;
-	int* adj;
+	vector<int> adj;
 	d[index]=0;
 	p[index]=0;
 	int newSum = 0;
@@ -183,21 +183,22 @@ void Graphs_P3::printDijkstra(int source){
 		//get adjency list
 		adj = getAdjacent(theVertices[index].name);//need to be checked
 
-		size = arraySize(adj);
+
 
 		//traverse adj list;
 		j=0;
-		while(j!=size){
+		while(j!=adj.size()){
 			/*if statement: the distance to adjacent node+vertex distance to start < the stored value distance
 	inside then change to the smaller value and then update the p list
 			 */
 
-			newSum = getWeight(theVertices[index].name, *(adj+j))+d[index];
-			if (newSum < d[vertexConverter[*(adj+j)]-1]){
-				d[vertexConverter[*(adj+j)]-1] = newSum;
-				p[vertexConverter[*(adj+j)]-1] = theVertices[index].name;
+			newSum = getWeight(theVertices[index].name, adj[j])+d[index];
+			if (newSum < d[vertexConverter[adj[j]]-1]){
+				d[vertexConverter[adj[j]]-1] = newSum;
+				p[vertexConverter[adj[j]]-1] = theVertices[index].name;
 			}
 			j++;
+
 		}
 		//Traverse the dlist and find the min
 		index=getMinIndex(d,s,numVertices);//return the index of the min distance
