@@ -32,20 +32,16 @@ void printPath(int index, int* p, vector<Vertex>v, int* vC){
 		cout<<v[p[index]].name;
 	}
 	else{
-	printPath(vC[p[index]]-1, p,v, vC);//here
-	cout<<"-"<<v[index].name;
+		printPath(vC[p[index]]-1, p,v, vC);//here
+		cout<<"-"<<v[index].name;
 	}
 }
 int getMinIndex(int* d, set<int> s, int numVertices){//find min of the array that's not in the set
 	int min = numeric_limits<int>::max();
 	int minIndex = 0;
 	for (int i = 0; i<numVertices; ++i){
-		//	cout<<"debug:: "<<d[i]<<endl;
 		if(min>d[i] && s.count(i)!=1){
-
 			min = d[i];
-			//		cout<<"debug:: "<<min<<endl;
-
 			minIndex = i;
 		}
 	}
@@ -81,7 +77,7 @@ public:
 	void insertEdge(int from, int to, int weight);  //inserts new edge in graph
 	bool isEdge(int from, int to);  //returns true if there is an edge between the vertices from and to
 	int getWeight(int from, int to);  //returns the weight of the edge between the vertices from and to
-    vector<int> getAdjacent(int vertex);  //return an array of integers representing vertices adjacent to vertex
+	vector<int> getAdjacent(int vertex);  //return an array of integers representing vertices adjacent to vertex
 	void printDijkstra(int source);  //prints result of running Dijkstra algorithm with source vertex
 	void printGraph(); //prints graph in a format sorted by ascending vertex and edge list
 };
@@ -150,20 +146,16 @@ vector<int> Graphs_P3::getAdjacent(int vertex){  //return an array of integers r
 	return output;
 }
 
-
 void Graphs_P3::printDijkstra(int source){
 	//prints result of running Dijkstra algorithm with source vertex
-
 	set<int> s;//finalized list
 	int* d = new int[numVertices]; //distances list
 	int* p = new int[numVertices]; //prior nodes list
-
 	//initialize all distance list
 	for (int i = 0; i!= numVertices; i++){
 		d[i]= numeric_limits<int>::max() ;
 		p[i]=0;
 	}
-
 	//init the first thing to traverse(source)
 	int index = vertexConverter[source]-1;
 	vector<int> adj;
@@ -172,46 +164,34 @@ void Graphs_P3::printDijkstra(int source){
 	int newSum = 0;
 	int size;
 	int j=0;
-
 	//traverse the vertices
 	while (s.size() != numVertices){
 		//insert source into the finalized list
 		s.insert(index);
-		//debug
-	;
-
 		//get adjency list
 		adj = getAdjacent(theVertices[index].name);//need to be checked
-
-
-
 		//traverse adj list;
 		j=0;
 		while(j!=adj.size()){
 			/*if statement: the distance to adjacent node+vertex distance to start < the stored value distance
 	inside then change to the smaller value and then update the p list
 			 */
-
 			newSum = getWeight(theVertices[index].name, adj[j])+d[index];
 			if (newSum < d[vertexConverter[adj[j]]-1]){
 				d[vertexConverter[adj[j]]-1] = newSum;
 				p[vertexConverter[adj[j]]-1] = theVertices[index].name;
 			}
 			j++;
-
 		}
 		//Traverse the dlist and find the min
 		index=getMinIndex(d,s,numVertices);//return the index of the min distance
 	}
-
 	//some ways to print out stuff but save it to the last.
-	cout<<"V D P";
-	//debug
-
+		cout<<"V\ D\ P";
 	for (int i=1;i<numVertices;i++){
 		cout<<"\n";
-		cout<<theVertices[i].name<<" ";
-		cout<<d[i]<<" ";
+		cout<<theVertices[i].name<<"\ ";
+		cout<<d[i]<<"\ ";
 		printPath(i,p,theVertices,vertexConverter);
 	}
 }
@@ -220,7 +200,7 @@ void Graphs_P3::printGraph(){
 	for(int i =0; i<numVertices; i++){
 		v= &theVertices[i];
 		while(v){
-			cout<<v->name<<" ";
+			cout<<v->name<<"\ ";
 			v = v->next;
 		}
 		cout<<"\n";
