@@ -1,0 +1,21 @@
+Commentary for project 3
+
+Name: Lang Lin
+UFID: 78116191
+
+Graph Implementation
+I implement my graph with adjacency list. I chose this data structures
+because it can manipulate the size of memory at ease.
+
+Computational Complexity(insertVertex): O(1)
+Computational Complexity(insertEdge): O(V)
+Computational Complexity(isEdge): O(V)
+Computational Complexity(getWeight): O(V)
+Computational Complexity(getAdjacent): O(V)
+Computational complexity(Dijkstra's algorithm): O(V^2), where V is the number
+of vertices in the graph. 
+
+Dijkstra Algorithm(more to it)
+I use 2 arrays to implement the algorithm. The arrays represents the distance
+and prior nodes of each vertex. The visited node is stored at a set data structure. 
+To print the path of each vertex, I use a recursive method to do it. 

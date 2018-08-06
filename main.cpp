@@ -35,7 +35,7 @@ int main()
             case 3:
                 cin>>fro;
                 cin>>to;
-                cout<<g.isEdge(fro,to)<<endl;
+                cout<<g.isEdge(fro,to)<<"\n";
                 break;
             case 4:
                 cin>>fro;
