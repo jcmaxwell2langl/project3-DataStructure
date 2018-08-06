@@ -9,7 +9,7 @@
 #include <iostream>
 #include <set>
 using namespace std;
-int main()
+int main88()
 {
     //DO NOT CHANGE THIS FUNCTION. CHANGE YOUR IMPLEMENTATION CODE TO MAKE IT WORK
     int noOfLines, operation, vertex, to, fro, weight,source,j;
