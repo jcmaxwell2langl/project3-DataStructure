@@ -14,6 +14,7 @@
 #include <queue>
 using namespace std;
 //vertex data structure
+
 class Vertex{
 public:
 	bool headNode;
@@ -29,13 +30,14 @@ void printPath(int index, int* p, vector<Vertex>v, int* vC){
 	//base case: when p[i]=0;
 
 	if (p[index]==0){//correct
-		cout<<v[p[index]].name;
+		cout<<v[index].name;
 	}
 	else{
 		printPath(vC[p[index]]-1, p,v, vC);//here
 		cout<<"-"<<v[index].name;
 	}
 }
+
 int getMinIndex(int* d, set<int> s, int numVertices){//find min of the array that's not in the set
 	int min = numeric_limits<int>::max();
 	int minIndex = 0;
@@ -187,12 +189,14 @@ void Graphs_P3::printDijkstra(int source){
 		index=getMinIndex(d,s,numVertices);//return the index of the min distance
 	}
 	//some ways to print out stuff but save it to the last.
-		cout<<"V D P";
-	for (int i=1;i<numVertices;i++){
+	cout<<"V\ D\ P";
+	for (int i=0;i<numVertices;i++){
+		if(theVertices[i].name!= source){
 		cout<<"\n";
-		cout<<theVertices[i].name<<" ";
-		cout<<d[i]<<" ";
+		cout<<theVertices[i].name<<"\ ";
+		cout<<d[i]<<"\ ";
 		printPath(i,p,theVertices,vertexConverter);
+		}
 	}
 }
 void Graphs_P3::printGraph(){
@@ -201,67 +205,69 @@ void Graphs_P3::printGraph(){
 		v= &theVertices[i];
 		while(v){
 			cout<<v->name;
-            if(v->next)
-                cout<<" ";
+			if(v->next)
+				cout<<" ";
 			v = v->next;
 		}
 		cout<<"\n";
 	}
 }
-int main()
+
+int mainfasdf()
 {
-    //DO NOT CHANGE THIS FUNCTION. CHANGE YOUR IMPLEMENTATION CODE TO MAKE IT WORK
-    int noOfLines, operation, vertex, to, fro, weight,source,j;
-    vector<int> arr;
-    int arrSize;
-    Graphs_P3 g;
-    cin>>noOfLines;
-    for(int i=0;i<noOfLines;i++)
-    {
-        cin>>operation;
-        switch(operation)
-        {
-            case 1:
-                cin>>vertex;
-                g.insertVertex(vertex);
-                break;
-            case 2:
-                cin>>fro;
-                cin>>to;
-                cin>>weight;
-                g.insertEdge(fro,to,weight);
-                break;
-            case 3:
-                cin>>fro;
-                cin>>to;
-                cout<<g.isEdge(fro,to)<<"\n";
-                break;
-            case 4:
-                cin>>fro;
-                cin>>to;
-                cout<<g.getWeight(fro,to)<<"\n";
-                break;
-            case 5:
-                cin>>vertex;
-                arr=g.getAdjacent(vertex);
-                arrSize = arr.size();
-                j=0;
-                while(j<arrSize)
-                {
-                    cout<<arr[j]<<" ";
-                    j++;
-                }
-                cout<<"\n";
-                break;
-            case 6:
-                cin>>source;
-                g.printDijkstra(source);
-                cout<<"\n";
-                break;
-            case 7:
-                g.printGraph();
-                cout<<"\n";
-                break;
-        }
-    }
+	//DO NOT CHANGE THIS FUNCTION. CHANGE YOUR IMPLEMENTATION CODE TO MAKE IT WORK
+	int noOfLines, operation, vertex, to, fro, weight,source,j;
+	vector<int> arr;
+	int arrSize;
+	Graphs_P3 g;
+	cin>>noOfLines;
+	for(int i=0;i<noOfLines;i++)
+	{
+		cin>>operation;
+		switch(operation)
+		{
+		case 1:
+			cin>>vertex;
+			g.insertVertex(vertex);
+			break;
+		case 2:
+			cin>>fro;
+			cin>>to;
+			cin>>weight;
+			g.insertEdge(fro,to,weight);
+			break;
+		case 3:
+			cin>>fro;
+			cin>>to;
+			cout<<g.isEdge(fro,to)<<"\n";
+			break;
+		case 4:
+			cin>>fro;
+			cin>>to;
+			cout<<g.getWeight(fro,to)<<"\n";
+			break;
+		case 5:
+			cin>>vertex;
+			arr=g.getAdjacent(vertex);
+			arrSize = arr.size();
+			j=0;
+			while(j<arrSize)
+			{
+				cout<<arr[j]<<" ";
+				j++;
+			}
+			cout<<"\n";
+			break;
+		case 6:
+			cin>>source;
+			g.printDijkstra(source);
+			cout<<"\n";
+			break;
+		case 7:
+			g.printGraph();
+			cout<<"\n";
+			break;
+		}
+	}
 }
+

@@ -29,13 +29,14 @@ void printPath(int index, int* p, vector<Vertex>v, int* vC){
 	//base case: when p[i]=0;
 
 	if (p[index]==0){//correct
-		cout<<v[p[index]].name;
+		cout<<v[index].name;
 	}
 	else{
 		printPath(vC[p[index]]-1, p,v, vC);//here
 		cout<<"-"<<v[index].name;
 	}
 }
+
 int getMinIndex(int* d, set<int> s, int numVertices){//find min of the array that's not in the set
 	int min = numeric_limits<int>::max();
 	int minIndex = 0;
@@ -187,12 +188,14 @@ void Graphs_P3::printDijkstra(int source){
 		index=getMinIndex(d,s,numVertices);//return the index of the min distance
 	}
 	//some ways to print out stuff but save it to the last.
-		cout<<"V\ D\ P";
-	for (int i=1;i<numVertices;i++){
+	cout<<"V\ D\ P";
+	for (int i=0;i<numVertices;i++){
+		if(theVertices[i].name!= source){
 		cout<<"\n";
 		cout<<theVertices[i].name<<"\ ";
 		cout<<d[i]<<"\ ";
 		printPath(i,p,theVertices,vertexConverter);
+		}
 	}
 }
 void Graphs_P3::printGraph(){
@@ -201,9 +204,9 @@ void Graphs_P3::printGraph(){
 		v= &theVertices[i];
 		while(v){
 			cout<<v->name;
-			            if(v->next)
-			                cout<<" ";
-						v = v->next;
+			if(v->next)
+				cout<<" ";
+			v = v->next;
 		}
 		cout<<"\n";
 	}
